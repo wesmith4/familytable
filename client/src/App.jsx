@@ -5,6 +5,8 @@ import { Link, Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
+import withAuth from './components/withAuth';
+import UserPage from './components/UserPage';
 // import { Router } from 'express';
 
 function App() {
@@ -26,7 +28,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/users/authenticate" component={Login} />
           <Route exact path="/users/register" component={Register} />
-          {/* <Route exact path="/secret/myRecipes" component={} */}
+          <Route exact path="/" component={withAuth(UserPage)} />
         </Switch>
       </Router>
 

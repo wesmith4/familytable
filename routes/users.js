@@ -14,6 +14,7 @@ router.post('/register', async(req,res,next) => {
       res.status(500).send('Error registering new user: please try again!');
     } else {
       res.status(200).send('Hey there! Welcome to Family Table!');
+      console.log('New User registered : ', user);
     }
   });
 });
@@ -43,6 +44,8 @@ router.post('/authenticate', async(req,res,next) => {
             expiresIn: '1h'
           });
           res.cookie('token', token, {httpOnly: true}).sendStatus(200);
+
+          console.log('User logged in: ', user);
         }
       })
     }
@@ -52,5 +55,10 @@ router.post('/authenticate', async(req,res,next) => {
 router.get('/checkToken', withAuth, (req,res) => {
   res.sendStatus(200);
 });
+
+router.get('/current', withAuth, (req,res) => {
+  let user = User.findOne(req.cookies.token.email);
+  res.json({user: user});
+})
 
 module.exports = router;
