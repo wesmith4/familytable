@@ -15,7 +15,6 @@ export default class Home extends React.Component {
       .then(res => res.text())
       .then(res => this.setState({message: res}));
 
-    fetch('/users/current').then(res => res.json()).then(res => this.setState({user: res}));
   }
 
   render() {

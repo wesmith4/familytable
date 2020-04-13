@@ -52,13 +52,17 @@ router.post('/authenticate', async(req,res,next) => {
   })
 });
 
-router.get('/checkToken', withAuth, (req,res) => {
-  res.sendStatus(200);
+router.get('/checkToken', withAuth, async (req,res) => {
+  console.log(req.email);
+  const email = req.email;
+  // res.sendStatus(200)
+  let activeUser = {};
+  await User.findOne({email}, function(err, user) {
+    console.log(user);
+    activeUser = user;
+  });
+  res.status(200).send({user: activeUser});
 });
 
-router.get('/current', withAuth, (req,res) => {
-  let user = User.findOne(req.cookies.token.email);
-  res.json({user: user});
-})
 
 module.exports = router;

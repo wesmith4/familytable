@@ -28,7 +28,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/users/authenticate" component={Login} />
           <Route exact path="/users/register" component={Register} />
-          <Route exact path="/" component={withAuth(UserPage)} />
+          <Route exact path="/secret" component={withAuth(UserPage)} />
         </Switch>
       </Router>
 

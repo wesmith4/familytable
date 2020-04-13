@@ -7,7 +7,8 @@ export default function withAuth(ComponentToProtect) {
       super();
       this.state = {
         loading: true,
-        redirect: false
+        redirect: false,
+        user: {}
       }
     }
 
@@ -15,7 +16,11 @@ export default function withAuth(ComponentToProtect) {
       fetch('/users/checkToken')
         .then(res => {
           if (res.status === 200) {
-            this.setState({loading: false});
+
+            this.setState({
+              loading: false,
+              user: res.user
+            });
           } else {
             const error = new Error(res.error);
             throw error;
@@ -33,7 +38,7 @@ export default function withAuth(ComponentToProtect) {
         return null;
       }
       if (redirect) {
-        return <Redirect to="/users/login" />
+        return <Redirect to="/users/authenticate" />
       }
       return <ComponentToProtect {...this.props} />
     }
