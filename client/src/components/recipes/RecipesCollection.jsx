@@ -1,5 +1,6 @@
 import React from 'react';
 import DisplayRecipe from './DisplayRecipe';
+import NewRecipe from './NewRecipe';
 
 export default class RecipesCollection extends React.Component {
   constructor(props) {
@@ -24,7 +25,12 @@ export default class RecipesCollection extends React.Component {
     for (let each of this.state.recipes) {
       recipes.push(<DisplayRecipe recipe={each} />)
     }
-    return recipes;
+    return (
+      <div className="userPage">
+        {recipes}
+        <NewRecipe />
+      </div>
+    );
   }
 
 }
