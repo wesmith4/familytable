@@ -8,7 +8,6 @@ export default function withAuth(ComponentToProtect) {
       this.state = {
         loading: true,
         redirect: false,
-        user: {}
       }
     }
 
@@ -16,10 +15,8 @@ export default function withAuth(ComponentToProtect) {
       fetch('/users/checkToken')
         .then(res => {
           if (res.status === 200) {
-
             this.setState({
               loading: false,
-              user: res.user
             });
           } else {
             const error = new Error(res.error);

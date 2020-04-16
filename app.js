@@ -4,7 +4,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const mongoose = require('mongoose');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -12,16 +12,19 @@ let secretRouter = require('./routes/secret');
 
 var app = express();
 
-// Mongoose setup
-let mongo_uri = 'mongodb://localhost/familytable'
-mongoose.connect(mongo_uri, function(err) {
-  if (err) {
-    throw err;
-  } else {
-    console.log(`Successfully connected to ${mongo_uri}.`);
-  }
-});
+app.root = (...args) => path.join(__dirname, ...args);
 
+if (!process.env.NODE_ENV) {
+  process.env.NODE_ENV = app.get('env');
+}
+
+// Database setup
+let Knex = require('knex');
+let dbConfig = require(app.root('knexfile'));
+let knex = Knex(dbConfig[process.env.NODE_ENV]);
+
+let { Model } = require('objection');
+Model.knex(knex);
 
 
 // view engine setup

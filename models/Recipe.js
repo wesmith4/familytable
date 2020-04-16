@@ -13,3 +13,32 @@ const RecipeSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Recipe', RecipeSchema);
+
+const { Model, snakeCaseMappers } = require('objection');
+
+class Recipe extends Model {
+  static get columnNameMappers() {
+    return snakeCaseMappers();
+  }
+
+  static get tableName() {
+    return 'recipes';
+  }
+
+  static get jsonSchema() {
+    return {
+      type: 'object',
+      required: [
+
+      ],
+      properties: {
+        id: {type: 'integer'},
+        title: {type: 'string'},
+        creatorName: {type: 'string'},
+        notes: {type: ['string', 'null']},
+      }
+    }
+  }
+}
+
+module.exports = Recipe;

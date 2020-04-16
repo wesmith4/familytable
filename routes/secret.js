@@ -21,7 +21,8 @@ router.get('/recipes', withAuth, (req,res,next) => {
 });
 
 router.post('/recipes/new', (req,res) => {
-
+  const { title, creatorName, ingredients, directions, notes } = req.body;
+  console.log(ingredients);
 })
 
 module.exports = router;

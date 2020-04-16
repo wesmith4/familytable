@@ -1,73 +1,29 @@
 import React from 'react';
 
-class IngredientInput extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      ingredient: '',
-      quantity: ''
-    }
-  }
-
-  handleInputChange = (event) => {
-    const { value, name } = event.target;
-    this.setState({[name]: value});
-  }
-
-  render() {
-    return (
-      <div className="form-group">
-        <input type="text" name="recipe[ingredients][][ingredient]" placeholder="Ingredient" value={this.state.ingredient} onChange={this.handleInputChange} required/>
-        <input type="text" name="recipe[ingredients][][quantity]" placeholder="Quantity" value={this.state.quantity} onChange={this.handleInputChange} required/>
-      </div>
-    )
-  }
-}
-
-class DirectionInput extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      step: ''
-    }
-  }
-
-  handleInputChange = (event) => {
-    const { value, name } = event.target;
-    this.setState({[name]: value});
-  }
-
-  render() {
-    return (
-      <input type="text" name="recipe[directions][]" placeholder="Step" value={this.state.step} onChange={this.handleInputChange}/>
-    )
-  }
-}
-
-
 export default class NewRecipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ingredientsForm: [
-        <IngredientInput />, <IngredientInput />, <IngredientInput />
-      ],
-      directionsForm: [
-        <DirectionInput />, <DirectionInput />, <DirectionInput />
-      ],
-      recipe: {
-        title: '',
-        creatorName: '',
-        ingredients: [],
-        directions: [],
-        notes: '',
-      }
+      title: '',
+      creatorName: '',
+      ingredients: [{ingredient: '', quantity: ''}, {ingredient: '', quantity: ''},{ingredient: '', quantity: ''}],
+      directions: [{step: ''}, {step: ''}, {step: ''}],
+      notes: '',
     }
   }
 
   handleInputChange = (event) => {
-    const {value, name} = event.target;
-    this.setState({[name]:value});
+    if (['ingredient', 'quantity'].includes(event.target.className)) {
+      let ingredients = [...this.state.ingredients];
+      ingredients[event.target.dataset.id][event.target.className] = event.target.value;
+      this.setState({ingredients: ingredients});
+    } else if (event.target.className === 'step') {
+      let directions = [...this.state.directions];
+      directions[event.target.dataset.id][event.target.className] = event.target.value;
+      this.setState({directions: directions});
+    } else {
+      this.setState({[event.target.name]: event.target.value});
+    }
   }
 
   onSubmit = (event) => {
@@ -91,35 +47,75 @@ export default class NewRecipe extends React.Component {
     })
   }
 
-  addStep = () => {
-    let steps = this.state.directionsForm;
-    steps.push(<DirectionInput />);
-    this.setState({directionsForm: steps});
+  addStep = (event) => {
+    this.setState((prevState) => ({
+      directions: [ ...prevState.directions, {step: ''}]
+    }));
   }
 
-  addIngredient = () => {
-    let ingredients = this.state.ingredientsForm;
-    ingredients.push(<IngredientInput />);
-    this.setState({ingredientsForm: ingredients});
+  addIngredient = (event) => {
+    this.setState((prevState) => ({
+      ingredients: [...prevState.ingredients, {ingredient: '', quantity: ''}]
+    }))
   };
 
   render() {
     return (
       <form onSubmit={this.onSubmit}>
         <h1>Add a recipe:</h1>
-        <input type="text" name="recipe[title]" placeholder="Title" value={this.state.recipe.title} onChange={this.handleInputChange} required/>
-        <input type="text" name="recipe[creatorName]" placeholder="Creator" value={this.state.recipe.creatorName} onChange={this.handleInputChange} required/>
+        <input type="text" name="title" placeholder="Title" value={this.statetitle} onChange={this.handleInputChange} required/>
+        <input type="text" name="creatorName" placeholder="Creator" value={this.state.creatorName} onChange={this.handleInputChange} required/>
         <div className="form-group">
-          {this.state.ingredientsForm}
+          <ul>
+          {this.state.ingredients.map((val,idx) => {
+            return (
+              <li><div className="form-group">
+                <input
+                type="text"
+                name="ingredient"
+                data-id={idx}
+                value={this.state.ingredients[idx].ingredient}
+                onChange={this.handleInputChange}
+                className="ingredient"
+                placeholder="Ingredient"/>
+                <input
+                  type="text"
+                  name="quantity"
+                  data-id={idx}
+                  value={this.state.ingredients[idx].quantity}
+                  onChange={this.handleInputChange}
+                  className="quantity"
+                  placeholder="Quantity"/>
+              </div></li>
+            )
+          })}
+          </ul>
           <input type="button" value="Add Ingredient" onClick={this.addIngredient}/>
         </div>
         <div className="form-group">
-          {this.state.directionsForm}
+          <ol>
+          {this.state.directions.map((val, idx) => {
+            return (
+              <li><div className="form-group">
+                <input type="text"
+                  name=""
+                  id=""
+                  data-id={idx}
+                  value={this.state.directions[idx].step}
+                  onChange={this.handleInputChange}
+                  className="step"
+                  placeholder="Step"/>
+              </div></li>
+            )
+          })}
+          </ol>
+
           <input type="button" value="Add Step" onClick={this.addStep}/>
         </div>
         <div className="form-group">
-          <textarea name="recipe[notes]" placeholder="Notes" value={this.state.recipe.notes} onChange={this.handleInputChange} cols="30" rows="10"></textarea>
+          <textarea name="notes" placeholder="Notes" value={this.state.notes} onChange={this.handleInputChange} cols="30" rows="10"></textarea>
         </div>
+        <input type="submit" value="Submit"/>
       </form>
     )
   }
