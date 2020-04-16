@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class Login extends React.Component {
     }).then(res => {
       if (res.status === 200) {
         this.props.history.push('/');
+        return <Redirect to="/userPage" />
       } else {
         const error = new Error(res.error);
         throw error;

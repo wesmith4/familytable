@@ -12,7 +12,7 @@ import UserPage from './components/UserPage';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <header>
         <a className="App-link" href="/"><h1>Family Table</h1></a>
       </header>
 
@@ -21,6 +21,7 @@ function App() {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/users/register">Register</Link></li>
           <li><Link to="/users/authenticate">Login</Link></li>
+          <li><Link to="/userPage">User Page</Link></li>
         </ul>
 
 
@@ -29,7 +30,8 @@ function App() {
           <Route exact path="/users/authenticate" component={Login} />
           <Route exact path="/users/register" component={Register} />
           <Route exact path="/secret" component={withAuth(UserPage)} />
-          
+          <Route exact path="/userPage" component={withAuth(UserPage)} />
+
         </Switch>
       </Router>
 

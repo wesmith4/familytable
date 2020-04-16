@@ -12,8 +12,10 @@ export default class UserPage extends React.Component {
   }
 
   getUser = () => {
-    fetch('/users/checkToken').then(res => res.json())
+    fetch('/secret/userPage').then(res => res.json())
       .then(res => this.setState({user: res.user}));
+      console.log('getUser has been run!');
+      console.log('--------------------------------')
   }
 
   componentDidMount() {

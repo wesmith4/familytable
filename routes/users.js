@@ -17,13 +17,11 @@ router.post('/register', async(req,res,next) => {
 
   if (user) {
     // req.session.userId = user.id;
-    const payload = user.email;
+    const payload = {email: user.email};
     const token = jwt.sign(payload, process.env.SECRET, {expiresIn: '1h'});
     res.cookie('token', token, {httpOnly: true}).sendStatus(200);
     console.log('New user logged in: ', user);
-    res.redirect('/secret');
   } else {
-    res.redirect('/register');
   }
 });
 
@@ -35,17 +33,19 @@ router.post('/authenticate', async(req,res,next) => {
 
   if (passwordValid) {
     // req.session.userId = user.id;
-    const payload = email;
+    const payload = {email: email};
     const token = jwt.sign(payload, process.env.SECRET);
     res.cookie('token', token, {httpOnly: true}).sendStatus(200);
     console.log('Returning user logged in : ', user);
   } else {
-    res.redirect('/authenticate');
   }
 });
 
 router.get('/checkToken', withAuth, async (req,res) => {
-  res.sendStatus(200);
+  let email = req.email;
+  let activeUser = await User.query().findOne({email: email});
+  console.log(activeUser);
+  res.status(200).send();
 });
 
 

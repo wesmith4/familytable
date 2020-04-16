@@ -7,7 +7,7 @@ export default class NewRecipe extends React.Component {
       title: '',
       creatorName: '',
       ingredients: [{ingredient: '', quantity: ''}, {ingredient: '', quantity: ''},{ingredient: '', quantity: ''}],
-      directions: [{step: ''}, {step: ''}, {step: ''}],
+      directions: [{step: 1, action: ''}, {step: 2, action: ''}, {step: 3, action: ''}],
       notes: '',
     }
   }
@@ -17,7 +17,7 @@ export default class NewRecipe extends React.Component {
       let ingredients = [...this.state.ingredients];
       ingredients[event.target.dataset.id][event.target.className] = event.target.value;
       this.setState({ingredients: ingredients});
-    } else if (event.target.className === 'step') {
+    } else if (event.target.className === 'action') {
       let directions = [...this.state.directions];
       directions[event.target.dataset.id][event.target.className] = event.target.value;
       this.setState({directions: directions});
@@ -48,8 +48,9 @@ export default class NewRecipe extends React.Component {
   }
 
   addStep = (event) => {
+    let nextNumber = this.state.directions.length + 1;
     this.setState((prevState) => ({
-      directions: [ ...prevState.directions, {step: ''}]
+      directions: [ ...prevState.directions, {step: nextNumber, action: ''}]
     }));
   }
 
@@ -71,13 +72,13 @@ export default class NewRecipe extends React.Component {
             return (
               <li><div className="form-group">
                 <input
-                type="text"
-                name="ingredient"
-                data-id={idx}
-                value={this.state.ingredients[idx].ingredient}
-                onChange={this.handleInputChange}
-                className="ingredient"
-                placeholder="Ingredient"/>
+                  type="text"
+                  name="ingredient"
+                  data-id={idx}
+                  value={this.state.ingredients[idx].ingredient}
+                  onChange={this.handleInputChange}
+                  className="ingredient"
+                  placeholder="Ingredient"/>
                 <input
                   type="text"
                   name="quantity"
@@ -101,9 +102,9 @@ export default class NewRecipe extends React.Component {
                   name=""
                   id=""
                   data-id={idx}
-                  value={this.state.directions[idx].step}
+                  value={this.state.directions[idx].action}
                   onChange={this.handleInputChange}
-                  className="step"
+                  className="action"
                   placeholder="Step"/>
               </div></li>
             )
