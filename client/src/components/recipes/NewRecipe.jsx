@@ -60,6 +60,18 @@ export default class NewRecipe extends React.Component {
     }))
   };
 
+  removeIngredient = (i) => {
+    let ingredients = this.state.ingredients;
+    ingredients.splice(i, 1);
+    this.setState({ingredients: ingredients});
+  }
+
+  removeStep = (i) => {
+    let steps = this.state.directions;
+    steps.splice(i, 1);
+    this.setState({directions: steps});
+  }
+
   render() {
     return (
       <form onSubmit={this.onSubmit}>
@@ -87,6 +99,7 @@ export default class NewRecipe extends React.Component {
                   onChange={this.handleInputChange}
                   className="quantity"
                   placeholder="Quantity"/>
+                <button onClick={() => this.removeIngredient(idx)}>Remove</button>
               </div></li>
             )
           })}
@@ -106,6 +119,7 @@ export default class NewRecipe extends React.Component {
                   onChange={this.handleInputChange}
                   className="action"
                   placeholder="Step"/>
+                <button onClick={() => this.removeStep(idx)}>Remove</button>
               </div></li>
             )
           })}
