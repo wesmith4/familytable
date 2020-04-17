@@ -21,9 +21,9 @@ router.get('/userPage', withAuth, async (req,res,next) => {
 router.post('/recipes/new', withAuth, async (req,res) => {
   let activeUser = await User.query().findOne({email: req.email});
 
+  console.log(req.body);
   const { title, creatorName, ingredients, directions, notes } = req.body;
-  console.log(ingredients);
-  console.log(directions);
+
 
   await Recipe.query().insertGraph([
     {

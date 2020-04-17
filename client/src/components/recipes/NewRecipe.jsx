@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container, Row, FormControl, FormGroup, FormLabel, Form} from 'react-bootstrap';
 
 export default class NewRecipe extends React.Component {
   constructor(props) {
@@ -7,7 +8,7 @@ export default class NewRecipe extends React.Component {
       title: '',
       creatorName: '',
       ingredients: [{ingredient: '', quantity: ''}, {ingredient: '', quantity: ''},{ingredient: '', quantity: ''}],
-      directions: [{step: 1, action: ''}, {step: 2, action: ''}, {step: 3, action: ''}],
+      directions: [{action: ''}, {action: ''}, {action: ''}],
       notes: '',
     }
   }
@@ -48,9 +49,8 @@ export default class NewRecipe extends React.Component {
   }
 
   addStep = (event) => {
-    let nextNumber = this.state.directions.length + 1;
     this.setState((prevState) => ({
-      directions: [ ...prevState.directions, {step: nextNumber, action: ''}]
+      directions: [ ...prevState.directions, {action: ''}]
     }));
   }
 
@@ -74,64 +74,76 @@ export default class NewRecipe extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit}>
-        <h1>Add a recipe:</h1>
-        <input type="text" name="title" placeholder="Title" value={this.statetitle} onChange={this.handleInputChange} required/>
-        <input type="text" name="creatorName" placeholder="Creator" value={this.state.creatorName} onChange={this.handleInputChange} required/>
-        <div className="form-group">
-          <ul>
-          {this.state.ingredients.map((val,idx) => {
-            return (
-              <li><div className="form-group">
-                <input
-                  type="text"
-                  name="ingredient"
-                  data-id={idx}
-                  value={this.state.ingredients[idx].ingredient}
-                  onChange={this.handleInputChange}
-                  className="ingredient"
-                  placeholder="Ingredient"/>
-                <input
-                  type="text"
-                  name="quantity"
-                  data-id={idx}
-                  value={this.state.ingredients[idx].quantity}
-                  onChange={this.handleInputChange}
-                  className="quantity"
-                  placeholder="Quantity"/>
-                <button onClick={() => this.removeIngredient(idx)}>Remove</button>
-              </div></li>
-            )
-          })}
-          </ul>
-          <input type="button" value="Add Ingredient" onClick={this.addIngredient}/>
-        </div>
-        <div className="form-group">
-          <ol>
-          {this.state.directions.map((val, idx) => {
-            return (
-              <li><div className="form-group">
-                <input type="text"
-                  name=""
-                  id=""
-                  data-id={idx}
-                  value={this.state.directions[idx].action}
-                  onChange={this.handleInputChange}
-                  className="action"
-                  placeholder="Step"/>
-                <button onClick={() => this.removeStep(idx)}>Remove</button>
-              </div></li>
-            )
-          })}
-          </ol>
+      <Container>
+      <div className="container">
+        <form onSubmit={this.onSubmit}>
+          <h1>Add a recipe:</h1>
+          <div className="form-group">
+            <input type="text" name="title" placeholder="Title" value={this.statetitle} onChange={this.handleInputChange} required/>
+          </div>
+          <div className="form-group">
+            <input type="text" name="creatorName" placeholder="Creator" value={this.state.creatorName} onChange={this.handleInputChange} required/>
+          </div>
+          <div className="form-group">
+            <h4>Ingredients</h4>
+            <ul className="form-input-list">
+            {this.state.ingredients.map((val,idx) => {
+              return (
+                <li><div className="form-group">
+                  <input
+                    type="text"
+                    name="ingredient"
+                    data-id={idx}
+                    value={this.state.ingredients[idx].ingredient}
+                    onChange={this.handleInputChange}
+                    className="ingredient"
+                    placeholder="Ingredient"/>
+                  <input
+                    type="text"
+                    name="quantity"
+                    data-id={idx}
+                    value={this.state.ingredients[idx].quantity}
+                    onChange={this.handleInputChange}
+                    className="quantity"
+                    placeholder="Quantity"/>
+                  <button onClick={() => this.removeIngredient(idx)}>Remove</button>
+                </div></li>
+              )
+            })}
+            </ul>
+            <input type="button" value="Add Ingredient" onClick={this.addIngredient}/>
+          </div>
+          <div className="form-group">
+            <h4>Directions</h4>
+            <ol className="form-input-list">
+            {this.state.directions.map((val, idx) => {
+              return (
+                <div className="form-group"><li>
+                  <textarea cols="30" rows="3"
+                  /* <input type="text" */
+                    name=""
+                    id=""
+                    data-id={idx}
+                    value={this.state.directions[idx].action}
+                    onChange={this.handleInputChange}
+                    className="action"
+                    placeholder="Step">
+                  </textarea>
+                  <button onClick={() => this.removeStep(idx)}>Remove</button>
+                  </li></div>
+              )
+            })}
+            </ol>
 
-          <input type="button" value="Add Step" onClick={this.addStep}/>
-        </div>
-        <div className="form-group">
-          <textarea name="notes" placeholder="Notes" value={this.state.notes} onChange={this.handleInputChange} cols="30" rows="10"></textarea>
-        </div>
-        <input type="submit" value="Submit"/>
-      </form>
+            <input type="button" value="Add Step" onClick={this.addStep}/>
+          </div>
+          <div className="form-group">
+            <textarea name="notes" placeholder="Notes" value={this.state.notes} onChange={this.handleInputChange} cols="30" rows="5" className=""></textarea>
+          </div>
+          <input type="submit" value="Submit"/>
+        </form>
+      </div>
+      </Container>
     )
   }
 }

@@ -14,13 +14,11 @@ class Direction extends Model {
       type: 'object',
       required: [
         'recipeId',
-        'step',
         'action'
       ],
       properties: {
         id: {type: 'integer'},
         recipeId: {type: 'integer'},
-        step: {type: 'integer'},
         action: {type: 'string'}
       }
     }

@@ -26,9 +26,11 @@ export default class RecipesCollection extends React.Component {
       recipes.push(<DisplayRecipe recipe={each} />)
     }
     return (
-      <div className="userPage">
+      <div className="recipesCollection">
         {recipes}
-        <NewRecipe />
+        <div className="container">
+          <NewRecipe />
+        </div>
       </div>
     );
   }
