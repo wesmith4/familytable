@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import {Form, FormGroup, FormControl, Button} from 'react-bootstrap';
 
 class Login extends React.Component {
   constructor(props) {
@@ -40,12 +41,14 @@ class Login extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit}>
-        <h1>Log In</h1>
-        <input type="email" name="email" placeholder="Enter email" value={this.state.email} onChange={this.handleInputChange} required/>
-        <input type="password" name="password" placeholder="Enter password" value={this.state.password} onChange={this.handleInputChange} required/>
-        <input type="submit" value="Submit"/>
-      </form>
+      <Form onSubmit={this.onSubmit}>
+        <h2>Log In</h2>
+        <FormGroup className="form-input-list">
+          <FormControl type="email" name="email" placeholder="Email" value={this.state.email} onChange={this.handleInputChange} required/>
+          <FormControl type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleInputChange} required/>
+        </FormGroup>
+        <Button variant="primary" type="submit">Submit</Button>
+      </Form>
     );
   }
 }

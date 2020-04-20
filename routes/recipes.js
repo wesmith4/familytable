@@ -18,4 +18,22 @@ router.get('/myrecipes', withAuth, async (req,res) => {
   res.status(200).send({recipes: recipes});
 });
 
+
+// Request to view a single recipe in full (with ingredients and directions)
+router.get('/:recipeId', withAuth, async (req,res) => {
+  let activeUser = await User.query().findOne({email: req.email});
+  let thisRecipe = await Recipe.query().findById(req.params.recipeId);
+  let permission = (activeUser.id === thisRecipe.userId ? true : false);
+
+  if (permission) {
+    let ingredients = await thisRecipe.$relatedQuery('ingredients');
+    thisRecipe['ingredients'] = ingredients;
+    let directions = await thisRecipe.$relatedQuery('directions').orderBy('id');
+    thisRecipe['directions'] = directions;
+    res.status(200).send({recipe: thisRecipe});
+  } else {
+    res.status(401).send('You do not have permission to see this recipe.');
+  }
+});
+
 module.exports = router;

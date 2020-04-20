@@ -74,7 +74,8 @@ export default class NewRecipe2 extends React.Component {
 
   render() {
     return (
-        <Form onSubmit={this.onSubmit} className="container">
+      <div className="container-fluid">
+        <Form onSubmit={this.onSubmit}>
           <i class="fas fa-apple-alt"></i>
 
 
@@ -152,11 +153,12 @@ export default class NewRecipe2 extends React.Component {
             </ol>
             <Button variant="primary" onClick={this.addStep}>Add Step</Button>
           </FormGroup>
-          <FormGroup>
-            <textarea name="notes" placeholder="Notes" value={this.state.notes} onChange={this.handleInputChange} cols="30" rows="5" className=""></textarea>
+          <FormGroup className="form-input-list">
+            <FormControl as="textarea" name="notes" placeholder="Notes" value={this.state.notes} onChange={this.handleInputChange}/>
           </FormGroup>
           <Button type="submit" variant="primary">Submit</Button>
         </Form>
+      </div>
     )
   }
 }

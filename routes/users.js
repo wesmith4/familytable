@@ -34,7 +34,7 @@ router.post('/authenticate', async(req,res,next) => {
   if (passwordValid) {
     // req.session.userId = user.id;
     const payload = {email: email};
-    const token = jwt.sign(payload, process.env.SECRET);
+    const token = jwt.sign(payload, process.env.SECRET, {expiresIn: '1h'});
     res.cookie('token', token, {httpOnly: true}).sendStatus(200);
     console.log('Returning user logged in : ', user);
   } else {

@@ -8,6 +8,8 @@ import Home from './components/Home';
 import withAuth from './components/withAuth';
 import UserPage from './components/UserPage';
 import UserBar from './components/UserBar';
+import NewRecipe2 from './components/recipes/NewRecipe2';
+import DisplayRecipe from './components/recipes/DisplayRecipe';
 // import { Router } from 'express';
 
 function App() {
@@ -22,7 +24,7 @@ function App() {
       </div> */}
       <UserBar />
 
-      <div className="container">
+      <div className="container-fluid">
 
       <Router>
       {/*   <div className="container">
@@ -39,6 +41,9 @@ function App() {
           <Route exact path="/users/authenticate" component={Login} />
           <Route exact path="/users/register" component={Register} />
           <Route exact path="/userPage" component={withAuth(UserPage)} />
+          <Route exact path="/newRecipe" component={withAuth(NewRecipe2)} />
+          <Route exact path="/recipes/:recipeId" component={withAuth(DisplayRecipe)} />
+
         </Switch>
       </Router>
 
