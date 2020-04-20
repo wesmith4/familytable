@@ -1,5 +1,6 @@
 import React from 'react';
 import UserPage from './UserPage';
+import Clock from './Clock';
 
 export default class Home extends React.Component {
   constructor() {
@@ -28,8 +29,7 @@ export default class Home extends React.Component {
     } else {
       return (
         <div>
-          <h1>Home</h1>
-          <p>{this.state.message}</p>
+          <Clock />
         </div>
       )
     }

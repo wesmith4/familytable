@@ -45,7 +45,7 @@ export default class NewRecipe extends React.Component {
     }).catch(err => {
       console.error(err);
       alert('Please try submitting again.');
-    })
+    });
   }
 
   addStep = (event) => {
@@ -79,7 +79,7 @@ export default class NewRecipe extends React.Component {
         <form onSubmit={this.onSubmit}>
           <h1>Add a recipe:</h1>
           <div className="form-group">
-            <input type="text" name="title" placeholder="Title" value={this.statetitle} onChange={this.handleInputChange} required/>
+            <input type="text" name="title" placeholder="Title" value={this.state.title} onChange={this.handleInputChange} required/>
           </div>
           <div className="form-group">
             <input type="text" name="creatorName" placeholder="Creator" value={this.state.creatorName} onChange={this.handleInputChange} required/>

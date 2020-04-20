@@ -27,7 +27,7 @@ class Login extends React.Component {
     }).then(res => {
       if (res.status === 200) {
         this.props.history.push('/');
-        return <Redirect to="/userPage" />
+        return <Redirect to="/userPage" />;
       } else {
         const error = new Error(res.error);
         throw error;
@@ -41,7 +41,7 @@ class Login extends React.Component {
   render() {
     return (
       <form onSubmit={this.onSubmit}>
-        <h1>Log In Below:</h1>
+        <h1>Log In</h1>
         <input type="email" name="email" placeholder="Enter email" value={this.state.email} onChange={this.handleInputChange} required/>
         <input type="password" name="password" placeholder="Enter password" value={this.state.password} onChange={this.handleInputChange} required/>
         <input type="submit" value="Submit"/>

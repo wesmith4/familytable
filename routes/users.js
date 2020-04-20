@@ -44,8 +44,9 @@ router.post('/authenticate', async(req,res,next) => {
 router.get('/checkToken', withAuth, async (req,res) => {
   let email = req.email;
   let activeUser = await User.query().findOne({email: email});
-  console.log(activeUser);
-  res.status(200).send();
+  console.log('CHECK TOKEN RUN')
+  console.log('Active User: ',activeUser);
+  res.status(200).send({user: activeUser});
 });
 
 

@@ -28,6 +28,20 @@ class User extends Password(Model) {
       }
     }
   }
+
+  static get relationMappings() {
+    let Recipe = require('./Recipe');
+    return {
+      recipes: {
+        relation: Model.HasManyRelation,
+        modelClass: Recipe,
+        join: {
+          from: 'users.id',
+          to: 'recipes.user_id'
+        }
+      }
+    }
+  }
 }
 
 module.exports = User;
