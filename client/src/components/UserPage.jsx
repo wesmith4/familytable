@@ -1,5 +1,10 @@
 import React from 'react';
 import RecipesCollection from './recipes/RecipesCollection';
+import NewRecipe2 from './recipes/NewRecipe2';
+import Clock from './Clock';
+import ImageCarousel from './ImageCarousel';
+import { Button } from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 
 export default class UserPage extends React.Component {
@@ -7,12 +12,8 @@ export default class UserPage extends React.Component {
     super(props);
     this.state = {
       user: {},
-      message: ''
     }
-  }
-
-  getUser = () => {
-    fetch('/users/checkToken').then(res => res.json())
+    fetch('/secret/userPage').then(res => res.json())
       .then(res => this.setState({user: res.user}));
   }
 
@@ -20,13 +21,30 @@ export default class UserPage extends React.Component {
     this.getUser();
   }
 
+  getUser = () => {
+    fetch('/secret/userPage').then(res => res.json())
+      .then(res => this.setState({user: res.user}));
+  }
+
   render() {
-    console.log(this.state);
+    let user = this.state.user;
     return (
-      <div className="userPage">
-        <h2>Your recipes</h2>
-        <h3>Hello {this.state.user.fullName}</h3>
-        <RecipesCollection user={this.state.user}/>
+      <div className="userPage container-fluid">
+        <div className="row">
+          <div className="col-9">
+            <h1 className="display-1">Welcome</h1>
+            <Clock />
+            {/* The carousel of images/recipes goes here */}
+
+            <a href="/newRecipe"><Button>New Recipe</Button></a>
+
+          </div>
+          <div className="col-3">
+            {/* Recipes list sidebar goes here */}
+            <RecipesCollection recipes={user.recipes} />
+          </div>
+        </div>
+
       </div>
     )
   }

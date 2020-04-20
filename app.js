@@ -4,24 +4,28 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const mongoose = require('mongoose');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 let secretRouter = require('./routes/secret');
+let recipesRouter = require('./routes/recipes');
 
 var app = express();
 
-// Mongoose setup
-let mongo_uri = 'mongodb://localhost/familytable'
-mongoose.connect(mongo_uri, function(err) {
-  if (err) {
-    throw err;
-  } else {
-    console.log(`Successfully connected to ${mongo_uri}.`);
-  }
-});
+app.root = (...args) => path.join(__dirname, ...args);
 
+if (!process.env.NODE_ENV) {
+  process.env.NODE_ENV = app.get('env');
+}
+
+// Database setup
+let Knex = require('knex');
+let dbConfig = require(app.root('knexfile'));
+let knex = Knex(dbConfig[process.env.NODE_ENV]);
+
+let { Model } = require('objection');
+Model.knex(knex);
 
 
 // view engine setup
@@ -37,6 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/secret', secretRouter);
+app.use('/recipes', recipesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,9 +1,12 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
+import './style.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+// ? importScripts(["https://kit.fontawesome.com/c477d04768.js"]);
 
 ReactDOM.render(
   <BrowserRouter>
