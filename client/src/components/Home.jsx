@@ -41,11 +41,9 @@ export default class Home extends React.Component {
           <Router>
             <Switch>
               <Route exact path="/" component={UserPage} />
-              <Route exact path="/users/authenticate" component={Login} />
-              <Route exact path="/users/register" component={Register} />
               <Route exact path="/userPage" component={withAuth(UserPage)} />
               <Route exact path="/newRecipe" component={withAuth(NewRecipe2)} />
-              <Route exact path="/recipes/:recipeId" component={withAuth(DisplayRecipe)} />
+              <Route exact path="/myrecipes/:recipeId" component={withAuth(DisplayRecipe)} />
             </Switch>
           </Router>
 
@@ -60,18 +58,18 @@ export default class Home extends React.Component {
             <p class="lead">Hey there! Welcome to <strong>My Family Table</strong>, <em>your</em> site for storing treasured recipes and memories.</p>
             <hr class="my-4"></hr>
             <p class="lead">
-              <a class="btn btn-primary btn-lg" href="/users/authenticate#login" role="button">Log In</a>
+              <a class="btn btn-primary btn-lg" href="/authenticate#login" role="button">Log In</a>
             </p>
             <p class="lead">New to My Family Table?</p>
             <p className="lead">
-              <a class="btn btn-primary btn-lg" href="/users/register#register" role="button">Register</a>
+              <a class="btn btn-primary btn-lg" href="/register#register" role="button">Register</a>
             </p>
           </div>
 
           <Router>
             <Switch>
-              <Route exact path="/users/authenticate" component={Login} />
-              <Route exact path="/users/register" component={Register} />
+              <Route exact path="/authenticate" component={Login} />
+              <Route exact path="/register" component={Register} />
             </Switch>
           </Router>
         </div>

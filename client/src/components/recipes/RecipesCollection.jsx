@@ -5,7 +5,7 @@ import NewRecipe2 from './NewRecipe2';
 
 function showRecipeCard(recipe) {
 
-  let recipeUrl = `/recipes/${recipe.id}`;
+  let recipeUrl = `/myrecipes/${recipe.id}`;
   return (
     <li>
       <div className="card-title collapsible-header"><a href={recipeUrl}>{recipe.title}</a></div>
