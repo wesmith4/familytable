@@ -38,7 +38,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public/dist')));
 
-app.get('/', function(_, res) {
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/secret', secretRouter);
+app.use('/recipes', recipesRouter);
+
+app.get('*', function(_, res) {
   res.sendFile(path.join(__dirname, 'public/dist/index.html'), function(err) {
     if (err) {
       res.status(500).send(err)
@@ -46,15 +52,12 @@ app.get('/', function(_, res) {
   })
 });
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/secret', secretRouter);
-app.use('/recipes', recipesRouter);
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+
 
 // error handler
 app.use(function(err, req, res, next) {
