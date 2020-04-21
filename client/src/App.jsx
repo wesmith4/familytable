@@ -17,12 +17,6 @@ function App() {
     <div className="App">
       <script src="https://kit.fontawesome.com/c477d04768.js" crossorigin="anonymous"></script>
 
-      {/* <div>
-        <nav class="navbar fixed-top navbar-dark bg-primary">
-          <a class="navbar-brand App-link" href="/">Family Table</a>
-        </nav>
-      </div> */}
-
       <Home />
     </div>
   );
