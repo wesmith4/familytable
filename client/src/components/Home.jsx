@@ -60,11 +60,11 @@ export default class Home extends React.Component {
             <p class="lead">Hey there! Welcome to <strong>My Family Table</strong>, <em>your</em> site for storing treasured recipes and memories.</p>
             <hr class="my-4"></hr>
             <p class="lead">
-              <a class="btn btn-primary btn-lg" href="/users/authenticate" role="button">Log In</a>
+              <a class="btn btn-primary btn-lg" href="/users/authenticate#login" role="button">Log In</a>
             </p>
             <p class="lead">New to My Family Table?</p>
             <p className="lead">
-              <a class="btn btn-primary btn-lg" href="/users/register" role="button">Register</a>
+              <a class="btn btn-primary btn-lg" href="/users/register#register" role="button">Register</a>
             </p>
           </div>
 

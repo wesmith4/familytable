@@ -28,20 +28,22 @@ class Login extends React.Component {
     }).then(res => {
       if (res.status === 200) {
         this.props.history.push('/');
-        return <Redirect to="/userPage" />;
+        return <Redirect to="/" />;
       } else {
         const error = new Error(res.error);
         throw error;
       }
     }).catch(err => {
-      console.error(err);
-      alert('Please try logging in again');
+      if (err) {
+        console.error(err);
+        alert('Please try logging in again');
+      }
     });
   }
 
   render() {
     return (
-      <Form onSubmit={this.onSubmit}>
+      <Form onSubmit={this.onSubmit} id="login">
         <h2>Log In</h2>
         <FormGroup className="form-input-list">
           <FormControl type="email" name="email" placeholder="Email" value={this.state.email} onChange={this.handleInputChange} required/>

@@ -38,6 +38,7 @@ router.post('/authenticate', async(req,res,next) => {
     res.cookie('token', token, {httpOnly: true}).sendStatus(200);
     console.log('Returning user logged in : ', user);
   } else {
+    res.status(401).send('Invalid authentication request');
   }
 });
 
