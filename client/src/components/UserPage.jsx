@@ -13,8 +13,8 @@ export default class UserPage extends React.Component {
     this.state = {
       user: {},
     }
-    fetch('/secret/userPage').then(res => res.json())
-      .then(res => this.setState({user: res.user}));
+   /*  fetch('/secret/userPage').then(res => res.json())
+      .then(res => this.setState({user: res.user})); */
   }
 
   componentDidMount() {
@@ -35,6 +35,7 @@ export default class UserPage extends React.Component {
             <h1 className="display-1">Welcome</h1>
             <Clock />
             {/* The carousel of images/recipes goes here */}
+            <ImageCarousel />
 
             <a href="/newRecipe"><Button>New Recipe</Button></a>
 

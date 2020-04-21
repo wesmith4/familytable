@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 import { Container, Row, Col, Button, FormControl, FormGroup, FormLabel, Form} from 'react-bootstrap';
 
 export default class NewRecipe2 extends React.Component {
@@ -37,14 +38,18 @@ export default class NewRecipe2 extends React.Component {
       }
     }).then(res => {
       if (res.status === 200) {
-        this.props.history.push('/secret/recipes/new');
+        this.props.history.push('/userPage');
+        return <Redirect to='/userPage' />
       } else {
         const error = new Error(res.error);
         throw error;
       }
     }).catch(err => {
-      console.error(err);
-      alert('Please try submitting again.');
+      if (err) {
+        console.error(err);
+        alert('Please try submitting again.');
+      }
+      return <Redirect to='/userPage' />
     });
   }
 

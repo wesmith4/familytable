@@ -22,32 +22,8 @@ function App() {
           <a class="navbar-brand App-link" href="/">Family Table</a>
         </nav>
       </div> */}
-      <UserBar />
 
-      <div className="container-fluid">
-
-      <Router>
-      {/*   <div className="container">
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/users/register">Register</Link></li>
-            <li><Link to="/users/authenticate">Login</Link></li>
-            <li><Link to="/userPage">User Page</Link></li>
-          </ul>
-        </div> */}
-
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/users/authenticate" component={Login} />
-          <Route exact path="/users/register" component={Register} />
-          <Route exact path="/userPage" component={withAuth(UserPage)} />
-          <Route exact path="/newRecipe" component={withAuth(NewRecipe2)} />
-          <Route exact path="/recipes/:recipeId" component={withAuth(DisplayRecipe)} />
-
-        </Switch>
-      </Router>
-
-      </div>
+      <Home />
     </div>
   );
 }

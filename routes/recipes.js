@@ -30,6 +30,7 @@ router.get('/:recipeId', withAuth, async (req,res) => {
     thisRecipe['ingredients'] = ingredients;
     let directions = await thisRecipe.$relatedQuery('directions').orderBy('id');
     thisRecipe['directions'] = directions;
+    console.log(thisRecipe);
     res.status(200).send({recipe: thisRecipe});
   } else {
     res.status(401).send('You do not have permission to see this recipe.');
