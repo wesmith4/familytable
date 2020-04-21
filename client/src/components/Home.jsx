@@ -54,7 +54,26 @@ export default class Home extends React.Component {
     } else {
       return (
         <div>
-          <Clock />
+          <UserBar />
+          <div class="jumbotron">
+            <h1 class="display-4">My Family Table</h1>
+            <p class="lead">Hey there! Welcome to <strong>My Family Table</strong>, <em>your</em> site for storing treasured recipes and memories.</p>
+            <hr class="my-4"></hr>
+            <p class="lead">
+              <a class="btn btn-primary btn-lg" href="/users/authenticate" role="button">Log In</a>
+            </p>
+            <p class="lead">New to My Family Table?</p>
+            <p className="lead">
+              <a class="btn btn-primary btn-lg" href="/users/register" role="button">Register</a>
+            </p>
+          </div>
+
+          <Router>
+            <Switch>
+              <Route exact path="/users/authenticate" component={Login} />
+              <Route exact path="/users/register" component={Register} />
+            </Switch>
+          </Router>
         </div>
       )
     }
