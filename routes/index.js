@@ -10,8 +10,5 @@ router.get('/api/home', async (req,res,next) => {
   res.send('Welcome!');
 });
 
-router.get('/api/secret', async (req,res,next) => {
-  res.send('The password is "threepio"');
-})
 
 module.exports = router;

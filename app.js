@@ -36,7 +36,15 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/dist')));
+
+app.get('/', function(_, res) {
+  res.sendFile(path.join(__dirname, 'public/dist/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -58,16 +66,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, './client/build')))
-}
-app.get('*', function(_, res) {
-  res.sendFile(path.join(__dirname, 'client/build/index.html'), function(err) {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-})
 
 module.exports = app;
