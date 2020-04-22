@@ -61,7 +61,7 @@ router.get('/', async(req,res) => {
       recipe['directions'] = await recipe.$relatedQuery('directions').orderBy('id');
     }
     user['recipes'] = recipes;
-    console.log('Active User: ', user);
+    console.log('Active User: ', user.fullName);
     res.render('main', {user});
   } else {
     res.render('main', {welcome: true});
@@ -88,27 +88,30 @@ router.post('/newRecipe', async(req,res) => {
   let user = req.user;
   console.log('Attempting to upload new recipe for user: ', user.fullName);
 
-  let data = req.body;
-  console.log('Form DATA : ', data);
+  let recipe = req.body.recipe;
+  console.log('Recipe: ', recipe);
+  console.log('Ingredients', recipe.ingredients);
+  console.log('Directions: ', recipe.directions);
  /*  let newRecipe = JSON.parse(JSON.stringify(req.body));
   console.log('Form body: ', newRecipe);
+  */
   // let newRecipe = await Recipe.query().insertGraph([req.body.recipe]);
   let insertedRecipe = await Recipe.query().insertGraph([{
-    title: newRecipe.title,
-    creatorName: newRecipe.creatorName,
-    userId: req.user.id,
-    ingredients: newRecipe.ingredients,
-    directions: newRecipe.directions,
-    notes: newRecipe.notes
-  }]); */
+    title: recipe.title,
+    creatorName: recipe.creatorName,
+    story: recipe.story,
+    userId: user.id,
+    ingredients: recipe.ingredients,
+    directions: recipe.directions,
+    notes: recipe.notes
+  }]);
 
-  res.redirect('/');
-  /* if (insertedRecipe) {
+  if (insertedRecipe) {
     res.redirect('/');
   } else {
 
-    res.redirect('/');
-  } */
+    res.redirect('/newRecipe');
+  }
 
 });
 

@@ -46,3 +46,8 @@ body {
 main {
   background-color: var(--theme-beige);
 }
+.btn-red {
+  color: #fff;
+  background-color: var(--theme-red);
+  border-color: var(--theme-red);
+}

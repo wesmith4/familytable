@@ -21,6 +21,7 @@ class Recipe extends Model {
         userId: {type: 'integer'},
         title: {type: 'string'},
         creatorName: {type: 'string'},
+        story: {type: 'string'},
         notes: {type: ['string', 'null']},
       }
     }

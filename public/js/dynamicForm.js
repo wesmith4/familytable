@@ -5,18 +5,19 @@ function removeElementById(elementId) {
 
 function addIngredient() {
   let uniqueIndex = Math.floor(Math.random()*100);
+  let index = ingredientCounter;
   let newIngredient = document.createElement("li");
-  newIngredient.setAttribute('id', `ingredient-${uniqueIndex}`);
+  newIngredient.setAttribute('id', `ingredient-${index}`);
   let html = `
       <div class="form-row justify-content-center">
       <div class="col-3">
-        <input type="text" name="ingredients[][ingredient]" class="form-control" placeholder="Ingredient">
+        <input type="text" name="recipe[ingredients][${index}][ingredient]" class="form-control" placeholder="Ingredient">
       </div>
       <div class="col-3">
-        <input type="text" name="ingredients[][quantity]" class="form-control" placeholder="Quantity">
+        <input type="text" name="recipe[ingredients][${index}][quantity]" class="form-control" placeholder="Quantity">
       </div>
       <div class="col-2">
-        <button type="button" class="btn btn-sm" onclick="javascript:removeElementById('ingredient-${uniqueIndex}')">Remove</button>
+        <button type="button" class="btn btn-sm btn-red" onclick="javascript:removeElementById('ingredient-${index}')">Remove</button>
       </div>
       </div>
   `;
@@ -24,26 +25,38 @@ function addIngredient() {
 
   let formGroupDiv = document.getElementById('ingredient-inputs-group');
   formGroupDiv.appendChild(newIngredient);
+  ingredientCounter += 1;
+  console.log('Ingredient Counter: ', ingredientCounter);
 }
 
 function addStep() {
+  let formGroupDiv = document.getElementById('direction-inputs-group');
   let uniqueIndex = Math.floor(Math.random()*100);
+  let index = stepCounter;
   let newStep = document.createElement('li');
-  newStep.setAttribute('id', `step-${uniqueIndex}`);
+  newStep.setAttribute('id', `step-${index}`);
   let html = `
     <div class="form-row">
       <div class="col-10">
-        <textarea name="directions[][action]" class="form-control" placeholder="step"></textarea>
+        <textarea name="recipe[directions][${index}][action]" class="form-control" placeholder="step"></textarea>
       </div>
       <div class="col-2">
-        <button type="button" class="btn btn-sm" onclick="javascript:removeElementById('step-${uniqueIndex}')">Remove</button>
+        <button type="button" class="btn btn-sm btn-red" onclick="javascript:removeElementById('step-${index}')">Remove</button>
       </div>
     </div>
   `;
   newStep.innerHTML = html;
-  let formGroupDiv = document.getElementById('direction-inputs-group');
+
   formGroupDiv.appendChild(newStep);
+  stepCounter += 1;
+  console.log('Step Counter: ', stepCounter);
 }
+
+let ingredientCounter = 0;
+let stepCounter = 0;
+
+console.log('Ingredient Counter: ', ingredientCounter);
+console.log('Step Counter : ', stepCounter);
 
 for (let i = 0; i < 3; i++) {
   addIngredient();
