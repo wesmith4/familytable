@@ -13,7 +13,7 @@ class UserBar extends React.Component{
         <a className="navbar-brand" href="/"><i class="fas fa-user"></i></a>
         <h4>{tagName}</h4>
 
-        <h1 className="text-lg-center">My Family Table</h1>
+        <h1 className="text-md-center">My Family Table</h1>
 
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#userLinks" aria-controls="userLinks" aria-expanded="false" aria-label="Toggle navigation">

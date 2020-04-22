@@ -48,3 +48,5 @@ router.post('/sign-out', (req,res) => {
   req.session.userId = null;
   res.redirect('/');
 });
+
+module.exports = router;

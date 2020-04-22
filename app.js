@@ -9,6 +9,7 @@ let cookieSession = require('cookie-session');
 
 
 // Set up API routes
+let authRouter = require('./API/auth');
 let usersRouter = require('./API/users');
 let secretRouter = require('./API/secret');
 let recipesRouter = require('./API/recipes');
@@ -49,6 +50,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(app.root('public')));
+console.log('DIRNAME: ', __dirname);
 
 
 // Cookie session
@@ -68,13 +70,16 @@ app.use(sessionHandler);
 let getUser = require('./getUser');
 app.use(getUser);
 
-// Back end routes
+/* // Back end routes
 app.use('/users', usersRouter);
 app.use('/secret', secretRouter);
 app.use('/recipes', recipesRouter);
 
 // Front end routes
 app.use('/', homeRouter);
+app.use('/auth', authRouter); */
+let router = require('./routes');
+app.use('/', router);
 
 
 // catch 404 and forward to error handler

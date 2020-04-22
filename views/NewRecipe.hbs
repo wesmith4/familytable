@@ -1,18 +1,25 @@
-<form action="/secret/recipes/new" method="post" id="new-recipe-form">
+{{> UserBar}}
+<main>
+<div class="container">
+<form action="/newRecipe" method="POST" id="new-recipe-form">
+  <h2 class="display-3">New Recipe</h2>
   <div class="form-group">
     <label for="title-input">Title</label>
-    <input type="text" name="recipe[title]" id="title-input" class="form-control" placeholder="Title" required>
+    <input type="text" name="title" id="title-input" class="form-control" placeholder="Title" required>
   </div>
   <div class="form-group">
     <label for="creator-input">Creator</label>
-    <input type="text" name="recipe[creatorName]" id="creator-input" class="form-control" placeholder="Creator" required>
+    <input type="text" name="creatorName" id="creator-input" class="form-control" placeholder="Creator" required>
   </div>
-  <input type="hidden" name="recipe[userId]" value="{{user.id}}">
+  <input type="hidden" name="userId" value={{user.id}}>
 
   {{!-- Ingredients --}}
   <div class="form-group">
-    <input type="number" name="" id="">
-    {{#each ingredientInputs}}
+    <ul id="ingredient-inputs-group">
+
+    </ul>
+    <button type="button" onclick="javascript:addIngredient()" class="btn btn-secondary">Add Ingredient</button>
+      {{!-- <h2>{{this}}</h2>
       <div class="form-row">
         <div class="col">
           <input type="text" name="recipe[ingredients][][ingredient]" class="form-control" placeholder="Ingredient">
@@ -20,20 +27,29 @@
         <div class="col">
           <input type="text" name="recipe[ingredients][][quantity]" class="form-control" placeholder="Quantity">
         </div>
-      </div>
-    {{/each}}
+      </div> --}}
   </div>
+
 
   {{!-- Directions --}}
   <div class="form-group">
-    {{#each directionInputs}}
+    <ol id="direction-inputs-group">
+
+    </ol>
+    <button type="button" onclick="javascript:addStep()" class="btn btn-secondary">Add Step</button>
+{{!--     {{#each directionInputs}}
       <input type="text" name="recipe[directions][][action]" class="form-control" placeholder="Step">
-    {{/each}}
+    {{/each}} --}}
   </div>
 
   <div class="form-group">
     <label for="notes-input">Notes</label>
-    <textarea name="recipe[notes]" id="notes-input" cols="30" rows="10" class="form-control" placeholder="notes"></textarea>
+    <textarea name="notes" id="notes-input" cols="30" rows="10" class="form-control" placeholder="notes"></textarea>
   </div>
-
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+</div>
+</main>
+
+<script src="js/dynamicForm.js"></script>
