@@ -50,10 +50,18 @@ for (let i = 0; i < 3; i++) {
   addStep();
 }
 
-$( "form" ).submit(function( event ) {
-  $( this ).serializeArray();
-  event.preventDefault();
-  this.onSub
-});
 
-$("form").subm
+/* async function submitForm() {
+  console.log('RUNNING submitForm()');
+  let form = document.getElementById('new-recipe-form');
+
+  let data = form.serializeArray();
+  console.log('DATA: ', data);
+  await fetch('/newRecipe', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+} */

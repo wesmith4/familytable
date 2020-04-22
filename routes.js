@@ -79,8 +79,12 @@ router.get('/newRecipe', async(req,res) => {
 });
 
 router.post('/newRecipe', async(req,res) => {
-  console.log('Attempting to upload new recipe for user: ', req.user.fullName);
-  let newRecipe = JSON.parse(JSON.stringify(req.body));
+  let user = req.user;
+  console.log('Attempting to upload new recipe for user: ', user.fullName);
+
+  let data = req.body;
+  console.log('Form DATA : ', data);
+ /*  let newRecipe = JSON.parse(JSON.stringify(req.body));
   console.log('Form body: ', newRecipe);
   // let newRecipe = await Recipe.query().insertGraph([req.body.recipe]);
   let insertedRecipe = await Recipe.query().insertGraph([{
@@ -90,14 +94,15 @@ router.post('/newRecipe', async(req,res) => {
     ingredients: newRecipe.ingredients,
     directions: newRecipe.directions,
     notes: newRecipe.notes
-  }]);
+  }]); */
 
-  if (insertedRecipe) {
+  res.redirect('/');
+  /* if (insertedRecipe) {
     res.redirect('/');
   } else {
 
     res.redirect('/');
-  }
+  } */
 
 });
 
