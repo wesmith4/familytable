@@ -34,10 +34,10 @@ router.get('/register', (req,res) => {
 });
 
 router.post('/register', async(req,res) => {
-  let newUser = req.body;
-  console.log(newUser);
+  let newUser = req.body.newUser;
 
   let user = await User.query().insert(newUser);
+
   if (user) {
     req.session.userId = user.id;
     res.redirect('/');
