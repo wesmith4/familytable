@@ -1,6 +1,6 @@
 {{> UserBar}}
 <main>
-<div class="container">
+<div class="container white-background recipe-container">
 <form action="/newRecipe" method="POST" id="new-recipe-form">
   <h2 class="display-3">New Recipe</h2>
   <div class="form-group">
@@ -13,11 +13,11 @@
   </div>
 
   {{!-- Ingredients --}}
-  <div class="form-group">
+  <div class="form-group text-center theme">
     <ul id="ingredient-inputs-group">
 
     </ul>
-    <button type="button" onclick="javascript:addIngredient()" class="btn btn-secondary">Add Ingredient</button>
+    <button type="button" onclick="javascript:addIngredient()" class="btn btn-sm">Add Ingredient</button>
       {{!-- <h2>{{this}}</h2>
       <div class="form-row">
         <div class="col">
@@ -31,11 +31,11 @@
 
 
   {{!-- Directions --}}
-  <div class="form-group">
+  <div class="form-group text-center">
     <ol id="direction-inputs-group">
 
     </ol>
-    <button type="button" onclick="javascript:addStep()" class="btn btn-secondary">Add Step</button>
+    <button type="button" onclick="javascript:addStep()" class="btn btn-sm">Add Step</button>
 {{!--     {{#each directionInputs}}
       <input type="text" name="recipe[directions][][action]" class="form-control" placeholder="Step">
     {{/each}} --}}
@@ -43,9 +43,9 @@
 
   <div class="form-group">
     <label for="notes-input">Notes</label>
-    <textarea name="notes" id="notes-input" cols="30" rows="10" class="form-control" placeholder="notes"></textarea>
+    <textarea name="notes" id="notes-input" rows="3" class="form-control" placeholder="notes"></textarea>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-lg">Submit</button>
 </form>
 
 </div>

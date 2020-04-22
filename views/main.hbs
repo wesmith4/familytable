@@ -1,5 +1,4 @@
-{{> UserBar}}
-<main>
+<main class="theme-beige">
 {{!-- Render user page for active user --}}
 {{#if user}}
 {{> UserPage}}
@@ -11,7 +10,10 @@
 
 {{!-- Render login form if user logging in --}}
 {{#if login}}
+<div class="container theme-tea-green">
 {{> login}}
+</div>
+
 {{/if}}
 
 {{!-- Render registration form if new user registering --}}

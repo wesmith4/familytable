@@ -1,4 +1,12 @@
 
 main {
-  margin-top: 5rem;
+  margin-top: 6rem;
+  padding-bottom: 2%;
+}
+
+.recipe-container {
+  width: 65%;
+  padding: 2%;
+  background-color: white !important;
+  border-radius: 5%;
 }

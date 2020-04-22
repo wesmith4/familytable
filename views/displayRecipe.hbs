@@ -1,0 +1,33 @@
+<main class="theme-beige">
+<div class="container recipe-container">
+  <h1 class="display-2">{{recipe.title}}</h1>
+  <h3>{{recipe.creatorName}}</h3>
+  <p class="subhead">{{recipe.story}}</p>
+  <h4>Ingredients</h4>
+  <table class="table table-striped ingredients-table justify-content-center">
+    <thead>
+      <tr>
+        <th scope="col">Item</th>
+        <th scope="col">Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each recipe.ingredients}}
+        <tr>
+          <td>{{ingredient}}</td>
+          <td>{{quantity}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <h4>Directions</h4>
+  <ol class="list-group">
+    {{#each recipe.directions}}
+    <li class="list-group-item"><p>{{action}}</p></li>
+    {{/each}}
+  </ol>
+
+  <h4>Notes</h4>
+  <p>{{recipe.notes}}</p>
+</div>
+</main>

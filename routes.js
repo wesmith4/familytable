@@ -1,7 +1,7 @@
-let express = require('express');
-let router = express.Router();
 let User = require('./models/User');
 let Recipe = require('./models/Recipe');
+let Router = require('express-promise-router');
+let router = new Router();
 
 router.get('/login', async(req,res) => {
   if (req.user) {
@@ -55,6 +55,12 @@ router.get('/', async(req,res) => {
 
   if (req.user) {
     let user = req.user;
+    let recipes = await user.$relatedQuery('recipes');
+    for (let recipe of recipes) {
+      recipe['ingredients'] = await recipe.$relatedQuery('ingredients');
+      recipe['directions'] = await recipe.$relatedQuery('directions').orderBy('id');
+    }
+    user['recipes'] = recipes;
     console.log('Active User: ', user);
     res.render('main', {user});
   } else {
@@ -105,5 +111,24 @@ router.post('/newRecipe', async(req,res) => {
   } */
 
 });
+
+router.get('/recipes/:recipeId', async(req,res) => {
+  let recipeId = Number(req.params.recipeId);
+  let user = req.user;
+
+  let recipe = await Recipe.query().findById(recipeId);
+  console.log(recipe);
+
+  // Verify user
+  if (recipe.userId !== user.id) {
+    res.redirect('/login');
+  }
+
+  recipe['ingredients'] = await recipe.$relatedQuery('ingredients');
+  recipe['directions'] = await recipe.$relatedQuery('directions').orderBy('id');
+
+  res.render('displayRecipe', {recipe, user});
+
+})
 
 module.exports = router;

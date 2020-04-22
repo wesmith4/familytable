@@ -8,15 +8,15 @@ function addIngredient() {
   let newIngredient = document.createElement("li");
   newIngredient.setAttribute('id', `ingredient-${uniqueIndex}`);
   let html = `
-      <div class="form-row">
-      <div class="col-5">
+      <div class="form-row justify-content-center">
+      <div class="col-3">
         <input type="text" name="ingredients[][ingredient]" class="form-control" placeholder="Ingredient">
       </div>
-      <div class="col-5">
+      <div class="col-3">
         <input type="text" name="ingredients[][quantity]" class="form-control" placeholder="Quantity">
       </div>
       <div class="col-2">
-        <button type="button" class="btn btn-secondary" onclick="javascript:removeElementById('ingredient-${uniqueIndex}')">Remove</button>
+        <button type="button" class="btn btn-sm" onclick="javascript:removeElementById('ingredient-${uniqueIndex}')">Remove</button>
       </div>
       </div>
   `;
@@ -36,7 +36,7 @@ function addStep() {
         <textarea name="directions[][action]" class="form-control" placeholder="step"></textarea>
       </div>
       <div class="col-2">
-        <button type="button" class="btn btn-secondary" onclick="javascript:removeElementById('step-${uniqueIndex}')">Remove</button>
+        <button type="button" class="btn btn-sm" onclick="javascript:removeElementById('step-${uniqueIndex}')">Remove</button>
       </div>
     </div>
   `;
@@ -49,6 +49,7 @@ for (let i = 0; i < 3; i++) {
   addIngredient();
   addStep();
 }
+
 
 
 /* async function submitForm() {
