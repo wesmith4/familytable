@@ -1,0 +1,14 @@
+<div class="container">
+  <ul class="collapsible">
+    {{#each user.recipes}}
+      <li>
+        <div class="collapsible-header">{{title}}</div>
+        <a href="/myrecipes/{{id}}"><div class="collapsible-body">
+          <p>Created by {{creatorName}}</p>
+          <h6>Notes:</h6>
+          <p>{{notes}}</p>
+        </div></a>
+      </li>
+    {{/each}}
+  </ul>
+</div>

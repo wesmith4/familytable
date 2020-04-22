@@ -1,0 +1,39 @@
+<form action="/secret/recipes/new" method="post" id="new-recipe-form">
+  <div class="form-group">
+    <label for="title-input">Title</label>
+    <input type="text" name="recipe[title]" id="title-input" class="form-control" placeholder="Title" required>
+  </div>
+  <div class="form-group">
+    <label for="creator-input">Creator</label>
+    <input type="text" name="recipe[creatorName]" id="creator-input" class="form-control" placeholder="Creator" required>
+  </div>
+  <input type="hidden" name="recipe[userId]" value="{{user.id}}">
+
+  {{!-- Ingredients --}}
+  <div class="form-group">
+    <input type="number" name="" id="">
+    {{#each ingredientInputs}}
+      <div class="form-row">
+        <div class="col">
+          <input type="text" name="recipe[ingredients][][ingredient]" class="form-control" placeholder="Ingredient">
+        </div>
+        <div class="col">
+          <input type="text" name="recipe[ingredients][][quantity]" class="form-control" placeholder="Quantity">
+        </div>
+      </div>
+    {{/each}}
+  </div>
+
+  {{!-- Directions --}}
+  <div class="form-group">
+    {{#each directionInputs}}
+      <input type="text" name="recipe[directions][][action]" class="form-control" placeholder="Step">
+    {{/each}}
+  </div>
+
+  <div class="form-group">
+    <label for="notes-input">Notes</label>
+    <textarea name="recipe[notes]" id="notes-input" cols="30" rows="10" class="form-control" placeholder="notes"></textarea>
+  </div>
+
+</form>
