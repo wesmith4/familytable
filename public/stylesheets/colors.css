@@ -46,10 +46,16 @@ body {
 main {
   background-color: var(--theme-beige);
 }
+
 .btn-red {
-  color: #fff;
+  color: var(--theme-beige);
   background-color: var(--theme-red);
   border-color: var(--theme-red);
+}
+
+.btn-red:hover {
+  background-color: var(--theme-beige) !important;
+  color: var(--theme-red) !important;
 }
 
 .btn-outline-beige {
