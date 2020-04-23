@@ -1,0 +1,28 @@
+
+main {
+  margin-top: 6rem;
+  padding-bottom: 2%;
+}
+
+.recipe-container {
+  width: 65%;
+  padding: 2%;
+  background-color: white !important;
+  border-radius: 5%;
+}
+
+.auth-container {
+  width: 65%;
+  padding: 2%;
+  background-color: white !important;
+  border-radius: 5%;
+}
+
+.recipe-card-link:hover {
+  text-decoration: none !important;
+}
+
+#recipe-list {
+  width: 100%;
+  max-height: 100vh;
+}

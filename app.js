@@ -1,14 +1,26 @@
+'use strict';
+
 require('dotenv').config()
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+let handlebars = require('express-handlebars');
+let cookieSession = require('cookie-session');
 
 
-var usersRouter = require('./routes/users');
-let secretRouter = require('./routes/secret');
-let recipesRouter = require('./routes/recipes');
+// Set up API routes
+let authRouter = require('./API/auth');
+let usersRouter = require('./API/users');
+let secretRouter = require('./API/secret');
+let recipesRouter = require('./API/recipes');
+
+
+
+// Set up Front End routes
+let homeRouter = require('./Frontend/home');
+
 
 var app = express();
 
@@ -27,35 +39,55 @@ let { Model } = require('objection');
 Model.knex(knex);
 
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// Handlebars view engine setup
+app.set('view engine', 'hbs');
+app.engine('hbs', handlebars({
+  layoutsDir: __dirname + '/views/layouts',
+  extname: 'hbs',
+  defaultLayout: 'layout'
+}))
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public/dist')));
+app.use(express.static(app.root('public')));
+console.log('DIRNAME: ', __dirname);
 
 
+// Cookie session
+if (process.env.SECRET) {
+  app.set('session-secret', process.env.SECRET);
+} else {
+  app.set('session-secret', 'f3quq4930fdsi');
+}
 
+let sessionHandler = cookieSession({
+  name: 'session',
+  secret: app.get('session-secret')
+});
+app.use(sessionHandler);
+
+
+let getUser = require('./getUser');
+app.use(getUser);
+
+/* // Back end routes
 app.use('/users', usersRouter);
 app.use('/secret', secretRouter);
 app.use('/recipes', recipesRouter);
 
-app.get('*', function(_, res) {
-  res.sendFile(path.join(__dirname, 'public/dist/index.html'), function(err) {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-});
+// Front end routes
+app.use('/', homeRouter);
+app.use('/auth', authRouter); */
+let router = require('./routes');
+app.use('/', router);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
 
 
 // error handler

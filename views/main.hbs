@@ -1,0 +1,23 @@
+<main class="theme-beige">
+{{!-- Render user page for active user --}}
+{{#if user}}
+{{> UserPage}}
+{{else}}
+
+{{#if welcome}}
+{{> welcomePage}}
+{{/if}}
+
+{{!-- Render login form if user logging in --}}
+{{#if login}}
+{{> login}}
+
+{{/if}}
+
+{{!-- Render registration form if new user registering --}}
+{{#if register}}
+{{> register}}
+{{/if}}
+
+{{/if}}
+</main>

@@ -1,0 +1,65 @@
+:root {
+  --theme-red: #FE5F55;
+  --theme-mid-yellow: #F0B67F;
+  --theme-dutch-white: #D6D1B1;
+  --theme-tea-green: #C7EFCF;
+  --theme-beige: #EEF5DB;
+}
+
+.theme-red {
+  background-color: var(--theme-red) !important;
+}
+
+.theme-mid-yellow {
+  background-color: var(--theme-mid-yellow) !important;
+}
+
+.theme-dutch-white {
+  background-color: var(--theme-dutch-white) !important;
+}
+
+.theme-beige {
+  background-color: var(--theme-beige) !important;
+}
+
+.theme-tea-green {
+  background-color: var(--theme-tea-green) !important;
+}
+
+.white-background {
+  background-color: white !important;
+}
+
+#userbar.navbar {
+  background-color: var(--theme-red) !important;
+  color: var(--theme-dutch-white) !important;
+}
+
+html {
+  background-color: var(--theme-beige) !important;
+}
+
+body {
+  background-color: var(--theme-beige) !important;
+}
+
+main {
+  background-color: var(--theme-beige);
+}
+.btn-red {
+  color: #fff;
+  background-color: var(--theme-red);
+  border-color: var(--theme-red);
+}
+
+.btn-outline-beige {
+  color: var(--theme-beige) !important;
+  background-color: transparent;
+  background-image: none;
+  border-color: var(--theme-beige) !important;
+}
+
+.btn-outline-beige:hover {
+  background-color: var(--theme-beige) !important;
+  color: var(--theme-red) !important;
+}
