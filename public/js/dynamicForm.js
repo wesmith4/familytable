@@ -25,7 +25,6 @@ function addIngredient() {
 
   let formGroupDiv = document.getElementById('ingredient-inputs-group');
   formGroupDiv.appendChild(newIngredient);
-  $(`#ingredient-input-${ingredientCounter}`).focus();
   console.log('Ingredient Counter: ', ingredientCounter);
 }
 
