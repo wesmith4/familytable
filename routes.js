@@ -55,7 +55,7 @@ router.get('/', async(req,res) => {
 
   if (req.user) {
     let user = req.user;
-    let recipes = await user.$relatedQuery('recipes');
+    let recipes = await user.$relatedQuery('recipes').orderBy('title');
     for (let recipe of recipes) {
       recipe['ingredients'] = await recipe.$relatedQuery('ingredients');
       recipe['directions'] = await recipe.$relatedQuery('directions').orderBy('id');
