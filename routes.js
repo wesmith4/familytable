@@ -67,7 +67,6 @@ router.get('/', async(req,res) => {
     } else {
       res.render('main', {user})
     }
-    res.render('main', {user});
   } else {
     res.render('main', {welcome: true});
   }

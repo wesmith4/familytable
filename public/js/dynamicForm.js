@@ -11,7 +11,7 @@ function addIngredient() {
   let html = `
       <div class="form-row justify-content-center">
       <div class="col-3">
-        <input type="text" name="recipe[ingredients][${index}][ingredient]" class="form-control" placeholder="Ingredient">
+        <input type="text" name="recipe[ingredients][${index}][ingredient]" class="form-control" placeholder="Ingredient" id="ingredient-input-${index}">
       </div>
       <div class="col-3">
         <input type="text" name="recipe[ingredients][${index}][quantity]" class="form-control" placeholder="Quantity">
@@ -25,7 +25,7 @@ function addIngredient() {
 
   let formGroupDiv = document.getElementById('ingredient-inputs-group');
   formGroupDiv.appendChild(newIngredient);
-  ingredientCounter += 1;
+  $(`#ingredient-input-${ingredientCounter}`).focus();
   console.log('Ingredient Counter: ', ingredientCounter);
 }
 
@@ -38,7 +38,7 @@ function addStep() {
   let html = `
     <div class="form-row">
       <div class="col-10">
-        <textarea name="recipe[directions][${index}][action]" class="form-control" placeholder="step"></textarea>
+        <textarea name="recipe[directions][${index}][action]" class="form-control" placeholder="step" id="step-input-${index}"></textarea>
       </div>
       <div class="col-2">
         <button type="button" class="btn btn-sm btn-red" onclick="javascript:removeElementById('step-${index}')">Remove</button>
@@ -48,7 +48,6 @@ function addStep() {
   newStep.innerHTML = html;
 
   formGroupDiv.appendChild(newStep);
-  stepCounter += 1;
   console.log('Step Counter: ', stepCounter);
 }
 
@@ -59,8 +58,21 @@ console.log('Ingredient Counter: ', ingredientCounter);
 console.log('Step Counter : ', stepCounter);
 
 addIngredient();
+ingredientCounter += 1;
 addStep();
+stepCounter += 1;
 
+function newIngredientButton() {
+  addIngredient();
+  $(`#ingredient-input-${ingredientCounter}`).focus();
+  ingredientCounter += 1;
+}
+
+function newStepButton() {
+  addStep();
+  $(`#step-input-${stepCounter}`).focus();
+  stepCounter += 1;
+}
 
 
 /* async function submitForm() {
