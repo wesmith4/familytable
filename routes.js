@@ -62,6 +62,11 @@ router.get('/', async(req,res) => {
     }
     user['recipes'] = recipes;
     console.log('Active User: ', user.fullName);
+    if (recipes.length > 0) {
+      res.render('main', {user, userHasRecipes: true});
+    } else {
+      res.render('main', {user})
+    }
     res.render('main', {user});
   } else {
     res.render('main', {welcome: true});

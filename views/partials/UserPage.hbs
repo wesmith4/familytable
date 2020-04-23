@@ -1,5 +1,6 @@
 <div class="userPage container-fluid">
   <div class="row">
+    {{#if userHasRecipes}}
     <div class="col-9">
       {{!-- The carousel of images/recipes goes here --}}
       <div class="text-center">
@@ -12,6 +13,16 @@
     <div class="col-3 text-center">
       {{> RecipeList}}
     </div>
+    {{else}}
+    <div class="col">
+      <div class="text-center">
+        <a href="/newRecipe" class="btn btn-lg btn-red">New Recipe</a>
+      </div>
+      {{!-- <div> --}}
+        <img src="/img/table.png" alt="dining room table" srcset="" style="width: 90%; display: block; margin: 2% auto;">
+      {{!-- </div> --}}
+    </div>
+    {{/if}}
   </div>
 
 </div>
