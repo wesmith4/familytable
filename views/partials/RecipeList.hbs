@@ -3,7 +3,7 @@
     {{#each user.recipes}}
       <li>
         <div class="collapsible-header">{{title}}</div>
-        <a href="/recipes/{{id}}"><div class="collapsible-body">
+        <a href="/recipes?id={{id}}"><div class="collapsible-body">
           <p>Created by {{creatorName}}</p>
           <h6>Notes:</h6>
           <p>{{notes}}</p>

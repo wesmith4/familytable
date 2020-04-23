@@ -115,8 +115,9 @@ router.post('/newRecipe', async(req,res) => {
 
 });
 
-router.get('/recipes/:recipeId', async(req,res) => {
-  let recipeId = Number(req.params.recipeId);
+router.get('/recipes', async(req,res) => {
+
+  let recipeId = Number(req.query.id);
   let user = req.user;
 
   let recipe = await Recipe.query().findById(recipeId);
@@ -131,6 +132,21 @@ router.get('/recipes/:recipeId', async(req,res) => {
   recipe['directions'] = await recipe.$relatedQuery('directions').orderBy('id');
 
   res.render('displayRecipe', {recipe, user});
+});
+
+router.get('/recipes/search', async(req,res) => {
+  let searchTerm = req.query.term;
+  let user = req.user;
+
+  if (user) {
+    let results = await user.$relatedQuery('recipes')
+      .where('title', 'ilike', `%${searchTerm}%`);
+
+    console.log(results);
+
+    res.render('searchResults', {user, results, searchTerm});
+  }
+
 
 })
 

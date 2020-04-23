@@ -1,0 +1,18 @@
+<main class="theme-beige">
+<div class="container">
+<div class="card-deck">
+  {{#each results}}
+    <a href="/recipes?id={{id}}">
+      <div class="card" style="display: inline-block;">
+        <div class="card-body">
+          <h5 class="card-title">{{title}}</h5>
+          <p class="card-text">{{creatorName}}</p>
+          <small class="card-text">{{story}}</small>
+        </div>
+      </div>
+    </a>
+  {{/each}}
+</div>
+</div>
+
+</main>

@@ -10,3 +10,14 @@ main {
   background-color: white !important;
   border-radius: 5%;
 }
+
+.auth-container {
+  width: 65%;
+  padding: 2%;
+  background-color: white !important;
+  border-radius: 5%;
+}
+
+.recipe-card {
+
+}
