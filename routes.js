@@ -69,6 +69,7 @@ router.get('/', async(req,res) => {
 });
 
 router.get('/newRecipe', async(req,res) => {
+  let user = req.user;
   let {numIng, numSteps} = req.query;
 
   let ingredientInputs = [];
@@ -81,7 +82,7 @@ router.get('/newRecipe', async(req,res) => {
   }
 
   // let user = req.user;
-  res.render('NewRecipe', {ingredientInputs, directionInputs});
+  res.render('NewRecipe', {user});
 });
 
 router.post('/newRecipe', async(req,res) => {

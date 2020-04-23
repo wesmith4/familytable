@@ -58,10 +58,8 @@ let stepCounter = 0;
 console.log('Ingredient Counter: ', ingredientCounter);
 console.log('Step Counter : ', stepCounter);
 
-for (let i = 0; i < 3; i++) {
-  addIngredient();
-  addStep();
-}
+addIngredient();
+addStep();
 
 
 
