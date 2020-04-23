@@ -10,17 +10,6 @@ let handlebars = require('express-handlebars');
 let cookieSession = require('cookie-session');
 
 
-// Set up API routes
-let authRouter = require('./API/auth');
-let usersRouter = require('./API/users');
-let secretRouter = require('./API/secret');
-let recipesRouter = require('./API/recipes');
-
-
-
-// Set up Front End routes
-let homeRouter = require('./Frontend/home');
-
 
 var app = express();
 
@@ -72,14 +61,7 @@ app.use(sessionHandler);
 let getUser = require('./getUser');
 app.use(getUser);
 
-/* // Back end routes
-app.use('/users', usersRouter);
-app.use('/secret', secretRouter);
-app.use('/recipes', recipesRouter);
 
-// Front end routes
-app.use('/', homeRouter);
-app.use('/auth', authRouter); */
 let router = require('./routes');
 app.use('/', router);
 
