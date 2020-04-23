@@ -21,7 +21,7 @@ router.post('/login', async(req,res) => {
     req.session.userId = user.id;
     res.redirect('/');
   } else {
-    res.render('main', {invalidLogin: true})
+    res.render('main', {login: true, invalidLogin: true})
   }
 });
 
