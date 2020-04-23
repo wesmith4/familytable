@@ -1,14 +1,12 @@
-<div class="container">
-  <ul class="collapsible">
-    {{#each user.recipes}}
-      <li>
-        <div class="collapsible-header">{{title}}</div>
-        <a href="/recipes?id={{id}}"><div class="collapsible-body">
-          <p>Created by {{creatorName}}</p>
-          <h6>Notes:</h6>
-          <p>{{notes}}</p>
-        </div></a>
-      </li>
-    {{/each}}
-  </ul>
+<div class="container-fluid" style="height: inherit;">
+  <div class="list-group overflow-auto" id="recipe-list">
+  {{#each user.recipes}}
+    <a href="/recipes?id={{id}}" class="recipe-card-link">
+      <div class="list-group-item list-group-item-action">
+        <h4>{{title}}</h4>
+        <p>{{creatorName}}</p>
+      </div>
+    </a>
+  {{/each}}
+  </div>
 </div>
